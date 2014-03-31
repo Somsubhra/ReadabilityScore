@@ -8,6 +8,7 @@ def main():
     print p.number_of_sentences()
     print p.average_words_per_sentence()
     print p.average_word_length()
+    print p.number_of_jukthakshar()
 
 if __name__ == '__main__':
     main()

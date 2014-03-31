@@ -3,6 +3,11 @@ class Parser:
 
     # Constructor for parser class
     def __init__(self, filename):
+
+        # Declaration of language specific lists
+        separators = [u".", u"!", u"?"]
+        halan = u'\u0acd'
+
         self.filename = filename
 
         # Read the contents of file as UTF-8
@@ -21,12 +26,17 @@ class Parser:
         # Calculate the average word length
         self.avg_word_l = 0
 
-        separators = [u".", u"!", u"?"]
+        # Calculate number of jukthakshars
+        self.no_jukthakshar = 0
 
         for word in self.words:
             if word[-1] in separators and len(word) > 1:
                 self.no_sentences += 1
+
             self.avg_word_l += float(len(word)) / float(self.no_words)
+
+            if halan in word:
+                self.no_jukthakshar += word.count(halan)
 
         if self.no_sentences == 0:
             self.no_sentences = 1
@@ -46,3 +56,7 @@ class Parser:
     # Average word length
     def average_word_length(self):
         return self.avg_word_l
+
+    # Calculate number of jukthakshars
+    def number_of_jukthakshar(self):
+        return self.no_jukthakshar
