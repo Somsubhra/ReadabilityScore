@@ -7,6 +7,7 @@ def main():
     print p.words
     print p.number_of_sentences()
     print p.average_words_per_sentence()
+    print p.average_word_length()
 
 if __name__ == '__main__':
     main()

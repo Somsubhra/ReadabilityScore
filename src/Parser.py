@@ -18,11 +18,15 @@ class Parser:
         # Calculate number of sentences
         self.no_sentences = 0
 
+        # Calculate the average word length
+        self.avg_word_l = 0
+
         separators = [u".", u"!", u"?"]
 
         for word in self.words:
             if word[-1] in separators and len(word) > 1:
                 self.no_sentences += 1
+            self.avg_word_l += float(len(word)) / float(self.no_words)
 
     # Number of words in the content
     def number_of_words(self):
@@ -35,3 +39,7 @@ class Parser:
     # Average number of words per sentence
     def average_words_per_sentence(self):
         return float(self.no_words) / float(self.no_sentences)
+
+    # Average word length
+    def average_word_length(self):
+        return self.avg_word_l
