@@ -28,6 +28,9 @@ class Parser:
                 self.no_sentences += 1
             self.avg_word_l += float(len(word)) / float(self.no_words)
 
+        if self.no_sentences == 0:
+            self.no_sentences = 1
+
     # Number of words in the content
     def number_of_words(self):
         return self.no_words
