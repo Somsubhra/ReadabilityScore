@@ -4,6 +4,5 @@ class Parser:
         self.contents = open(filename).read()
         self.contents = self.contents.decode("utf-8")
 
-    def number_of_words(self):
-        words = self.contents.split()
-        return len(words)
+        self.words = self.contents.split()
+        self.number_of_words = len(self.words)
