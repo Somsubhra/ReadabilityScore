@@ -31,3 +31,7 @@ class Calculator:
     # Calculate Flesch Kincaid grade level
     def flesch_kincaid_frade_level(self):
         return (0.39 * float(self.parser.average_words_per_sentence())) + (11.8 * self.parser.average_syllable_per_word()) - 15.59
+
+    def coleman_liau_index(self):
+        return 0.0588 * (float(self.parser.average_letter_per_100_words())) \
+               - 0.296 * (self.parser.average_sentences_per_100_words()) - 15.8

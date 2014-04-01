@@ -38,7 +38,7 @@ class Runner:
                 # The parser
                 p = c.parser
 
-                print c.flesch_kincaid_frade_level()
+                print c.coleman_liau_index()
 
                 # The output line
                 output_line = "\"" + str(test_file) + "\";\"" + str(p.number_of_words()) + "\";\"" +\

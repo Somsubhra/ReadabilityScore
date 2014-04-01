@@ -228,3 +228,11 @@ class Parser:
     # Calculate number of total syllables
     def number_of_syllables(self):
         return self.no_syllables
+
+    # Calculate average number of character per hundred words
+    def average_letter_per_100_words(self):
+        return 100.0 * float(self.no_characters) / float(self.no_words)
+
+    # Calculate average sentences per hundred words
+    def average_sentences_per_100_words(self):
+        return 100.0 * float(self.no_sentences) / float(self.no_words)
