@@ -202,7 +202,7 @@ class Parser:
         return self.no_sentences
 
     # Average number of words per sentence
-    def average_words_per_sentence(self):
+    def average_sentence_length(self):
         return float(self.no_words) / float(self.no_sentences)
 
     # Average word length

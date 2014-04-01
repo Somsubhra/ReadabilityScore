@@ -21,7 +21,8 @@ class Calculator:
 
     # Calculate smog index
     def smog_index(self):
-        return 1.0430 * sqrt(float(self.parser.number_of_polysyllables()) * 30.0 / float(self.parser.number_of_sentences())) + 3.1291
+        return 1.0430 * sqrt(float(self.parser.number_of_polysyllables()) * 30.0 / float(self.parser.number_of_sentences()))\
+               + 3.1291
 
     # Calculate flesch reading ease
     def flesch_reading_ease(self):
@@ -30,7 +31,8 @@ class Calculator:
 
     # Calculate Flesch Kincaid grade level
     def flesch_kincaid_frade_level(self):
-        return (0.39 * float(self.parser.average_words_per_sentence())) + (11.8 * self.parser.average_syllable_per_word()) - 15.59
+        return (0.39 * float(self.parser.average_sentence_length())) + (11.8 * self.parser.average_syllable_per_word()) \
+               - 15.59
 
     def coleman_liau_index(self):
         return 0.0588 * (float(self.parser.average_letter_per_100_words())) \
