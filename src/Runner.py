@@ -1,4 +1,4 @@
-from Parser import *
+from Calculator import *
 from os import walk, path, stat, mkdir
 
 
@@ -32,8 +32,11 @@ class Runner:
             for filename in file_names:
                 test_file = path.join(dir_path, filename)
 
-                # Calculations
-                p = Parser(test_file)
+                # The index calculator
+                c = Calculator(test_file)
+
+                # The parser
+                p = c.parser
 
                 # The output line
                 output_line = "\"" + str(test_file) + "\";\"" + str(p.number_of_words()) + "\";\"" +\
