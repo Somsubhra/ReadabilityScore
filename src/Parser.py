@@ -138,6 +138,8 @@ class Parser:
             if halan in word:
                 self.no_jukthakshar += word.count(halan)
 
+            self.stripped_words.append(''.join([s for s in word if s in ordered_consonants]))
+
         if self.no_sentences == 0:
             self.no_sentences = 1
 

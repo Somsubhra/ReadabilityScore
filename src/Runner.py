@@ -34,6 +34,7 @@ class Runner:
                 p = Parser(test_file)
 
                 print p.words
+                print p.stripped_words
 
                 # The output line
                 output_line = "\"" + str(test_file) + "\";\"" + str(p.number_of_words()) + "\";\"" +\
