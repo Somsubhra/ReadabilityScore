@@ -137,6 +137,9 @@ class Parser:
         # Calculate the number of polysyllables
         self.no_polysyllables = 0
 
+        # Calculate total number of syllables
+        self.no_syllables = 0
+
         # Get the stripped words of the content
         self.stripped_words = []
 
@@ -179,6 +182,8 @@ class Parser:
                         state = state = ordered_consonants.index(word[i+1]) > ordered_consonants.index(word[i])
                         continue
 
+            self.no_syllables += no_syllables
+
             self.avg_syllable_w += float(no_syllables) / self.no_words
 
             if no_syllables > 2:
@@ -219,3 +224,7 @@ class Parser:
     # Calculate number of polysyllables per 30 sentences
     def number_of_polysyllables_per_30_sentences(self):
         return 30.0 * float(self.no_polysyllables) / float(self.no_sentences)
+
+    # Calculate number of total syllables
+    def number_of_syllables(self):
+        return self.no_syllables

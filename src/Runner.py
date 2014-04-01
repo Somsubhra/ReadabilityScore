@@ -38,7 +38,7 @@ class Runner:
                 # The parser
                 p = c.parser
 
-                print c.smog_index()
+                print c.flesch_reading_ease()
 
                 # The output line
                 output_line = "\"" + str(test_file) + "\";\"" + str(p.number_of_words()) + "\";\"" +\

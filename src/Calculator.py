@@ -22,3 +22,8 @@ class Calculator:
     # Calculate smog index
     def smog_index(self):
         return 1.0430 * sqrt(float(self.parser.number_of_polysyllables()) * 30.0 / float(self.parser.number_of_sentences())) + 3.1291
+
+    # Calculate flesch reading ease
+    def flesch_reading_ease(self):
+        return 206.835 - 1.105 * (float(self.parser.number_of_words()) / float(self.parser.number_of_sentences())) - \
+               84.6 * (float(self.parser.number_of_syllables()) / float(self.parser.number_of_words()))
