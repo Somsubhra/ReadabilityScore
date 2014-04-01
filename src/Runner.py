@@ -38,6 +38,8 @@ class Runner:
                 # The parser
                 p = c.parser
 
+                print c.automated_readability_index()
+
                 # The output line
                 output_line = "\"" + str(test_file) + "\";\"" + str(p.number_of_words()) + "\";\"" +\
                               str(p.number_of_sentences()) + "\";\"" + str(p.average_words_per_sentence()) \

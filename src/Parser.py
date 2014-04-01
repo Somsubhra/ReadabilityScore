@@ -113,6 +113,9 @@ class Parser:
         self.contents = open(filename).read()
         self.contents = self.contents.decode("utf-8")
 
+        # Calculate number of characters in content
+        self.no_characters = len(self.contents)
+
         # Store all words of content
         self.words = self.contents.split()
 
@@ -181,6 +184,9 @@ class Parser:
             if no_syllables > 2:
                 self.no_polysyllables += 1
 
+    # Number of characters in content
+    def number_of_characters(self):
+        return self.no_characters
 
     # Number of words in the content
     def number_of_words(self):
