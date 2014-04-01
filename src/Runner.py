@@ -21,8 +21,12 @@ class Runner:
 
         # Write to output file
         output_file = open('out/result.csv', 'w+')
-
         output_file.write("\"Filename\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK\"\n")
+
+        english_index_file = open('out/english_index.csv', 'w+')
+        english_index_file.write("\"Filename\";\"Automatic Readability Index\";"
+                                 "\"Gunning Fog Index\";\"Smog Index\";\"Flesch Reading Ease\";"
+                                 "\"Flesch Kincaid Grade Level\";\"Coleman Liau Index\"\n")
 
         # Walk through all files in tree
         for (dir_path, _, file_names) in walk(self.input_directory):
@@ -34,8 +38,6 @@ class Runner:
 
                 # The parser
                 p = c.parser
-
-                print c.coleman_liau_index()
 
                 # The output line
                 output_line = "\"" + str(test_file) \
@@ -55,4 +57,22 @@ class Runner:
 
                 output_file.write(output_line)
 
+                english_index_output_line = "\"" + str(test_file) \
+                                            + "\";\"" \
+                                            + str(c.automated_readability_index())\
+                                            + "\";\"" \
+                                            + str(c.gunning_fog_index())\
+                                            + "\";\"" \
+                                            + str(c.smog_index()) \
+                                            + "\";\""\
+                                            + str(c.flesch_reading_ease()) \
+                                            + "\";\"" \
+                                            + str(c.flesch_kincaid_grade_level()) \
+                                            + "\";\""\
+                                            + str(c.coleman_liau_index())\
+                                            + "\"\n"
+
+                english_index_file.write(english_index_output_line)
+
         output_file.close()
+        english_index_file.close()
