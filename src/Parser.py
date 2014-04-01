@@ -137,7 +137,7 @@ class Parser:
             for breaker in breakers:
                 word.replace(breaker, '')
 
-            if word[-1] in separators and len(word) > 1:
+            if word[-1] in separators:
                 self.no_sentences += 1
 
             self.avg_word_l += float(len(word)) / float(self.no_words)
