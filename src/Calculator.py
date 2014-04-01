@@ -1,3 +1,4 @@
+from math import sqrt
 from Parser import *
 
 
@@ -17,3 +18,7 @@ class Calculator:
     def gunning_fog_index(self):
         return 0.4 * ((float(self.parser.number_of_words()) / float(self.parser.number_of_sentences()))
                       + 100 * (float(self.parser.number_of_polysyllables()) / float(self.parser.number_of_words())))
+
+    # Calculate smog index
+    def smog_index(self):
+        return 1.0430 * sqrt(float(self.parser.number_of_polysyllables()) * 30.0 / float(self.parser.number_of_sentences())) + 3.1291
