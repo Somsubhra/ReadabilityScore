@@ -27,3 +27,7 @@ class Calculator:
     def flesch_reading_ease(self):
         return 206.835 - 1.105 * (float(self.parser.number_of_words()) / float(self.parser.number_of_sentences())) - \
                84.6 * (float(self.parser.number_of_syllables()) / float(self.parser.number_of_words()))
+
+    # Calculate Flesch Kincaid grade level
+    def flesch_kincaid_frade_level(self):
+        return (0.39 * float(self.parser.average_words_per_sentence())) + (11.8 * self.parser.average_syllable_per_word()) - 15.59
