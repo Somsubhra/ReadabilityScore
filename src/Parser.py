@@ -103,7 +103,7 @@ class Parser:
 
         # Consonants ordered based on the tongue action backward to forward
         ordered_consonants = [l_ha, l_a, l_ka, l_ga, l_kha, l_gha, l_ca, l_cha, l_ja, l_cha, l_sha, l_jha, l_ssa, l_nya,
-                              l_ya, l_dda, l_ddha, l_ttha, l_tta, l_na, l_la, l_ra, l_sa, l_ta, l_da, l_dha, l_tha,
+                              l_ya, l_da, l_dha, l_tha, l_ta, l_na, l_la, l_ra, l_sa, l_tta, l_dda, l_ddha, l_ttha,
                               l_nna, l_lla, l_nga, l_pha, l_va, l_ma, l_bha, l_ba, l_pa]
 
         self.filename = filename
