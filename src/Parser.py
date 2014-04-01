@@ -7,6 +7,7 @@ class Parser:
         # Declaration of language specific lists
 
         separators = [u".", u"!", u"?"]
+        breakers = [u",", u";", u":"]
 
         halan = u'\u0acd'
 
@@ -131,6 +132,11 @@ class Parser:
         self.stripped_words = []
 
         for word in self.words:
+
+            # Replace all trailing separators
+            for breaker in breakers:
+                word.replace(breaker, '')
+
             if word[-1] in separators and len(word) > 1:
                 self.no_sentences += 1
 
