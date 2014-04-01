@@ -127,6 +127,7 @@ class Parser:
         # Calculate number of jukthakshars
         self.no_jukthakshar = 0
 
+        # Get the stripped words of the content
         self.stripped_words = []
 
         for word in self.words:
