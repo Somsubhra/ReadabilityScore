@@ -144,6 +144,28 @@ class Parser:
         if self.no_sentences == 0:
             self.no_sentences = 1
 
+        for word in self.stripped_words:
+            no_syllables = 1
+
+            length = len(word)
+
+            if length > 3:
+                state = ordered_consonants.index(word[1]) > ordered_consonants.index(word[0])
+
+            for i in range(2, length - 1):
+                if state:
+                    if ordered_consonants.index(word[i]) < ordered_consonants.index(word[i-1]):
+                        no_syllables += 1
+                        state = ordered_consonants.index(word[i+1]) > ordered_consonants.index(word[i])
+                        continue
+                else:
+                    if ordered_consonants.index(word[i]) > ordered_consonants.index(word[i-1]):
+                        no_syllables += 1
+                        state = state = ordered_consonants.index(word[i+1]) > ordered_consonants.index(word[i])
+                        continue
+
+            print no_syllables
+
     # Number of words in the content
     def number_of_words(self):
         return self.no_words
