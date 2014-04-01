@@ -128,6 +128,12 @@ class Parser:
         # Calculate number of jukthakshars
         self.no_jukthakshar = 0
 
+        # Calculate average syllable per word
+        self.avg_syllable_w = 0
+
+        # Calculate the number of polysyllables
+        self.no_polysyllables = 0
+
         # Get the stripped words of the content
         self.stripped_words = []
 
@@ -170,7 +176,11 @@ class Parser:
                         state = state = ordered_consonants.index(word[i+1]) > ordered_consonants.index(word[i])
                         continue
 
-            print no_syllables
+            self.avg_syllable_w += float(no_syllables) / self.no_words
+
+            if no_syllables > 2:
+                self.no_polysyllables += 1
+
 
     # Number of words in the content
     def number_of_words(self):
@@ -191,3 +201,15 @@ class Parser:
     # Calculate number of jukthakshars
     def number_of_jukthakshar(self):
         return self.no_jukthakshar
+
+    # Calculate average number of syllables per word
+    def average_syllable_per_word(self):
+        return self.avg_syllable_w
+
+    # Calculate number of polysyllable words
+    def number_of_polysyllables(self):
+        return self.no_polysyllables
+
+    # Calculate number of polysyllables per 30 sentences
+    def number_of_polysyllables_per_30_sentences(self):
+        return 30.0 * float(self.no_polysyllables) / float(self.no_sentences)
