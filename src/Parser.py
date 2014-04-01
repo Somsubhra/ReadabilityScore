@@ -33,7 +33,7 @@ class Parser:
         l_o = u'\u0a93'
         l_ow = u'\u0a94'
 
-        # Consonants
+        # Consonant
         l_ka = u'\u0a95'
         l_kha = u'\u0a96'
         l_ga = u'\u0a97'
@@ -100,6 +100,11 @@ class Parser:
         l_7 = u'\u0aed'
         l_8 = u'\u0aee'
         l_9 = u'\u0aef'
+
+        # Consonants ordered based on the tongue action backward to forward
+        ordered_consonants = [l_ha, l_ka, l_ga, l_kha, l_gha, l_ca, l_cha, l_ja, l_cha, l_sha, l_jha, l_ssa, l_nya,
+                              l_ya, l_dda, l_ddha, l_ttha, l_tta, l_na, l_la, l_ra, l_sa, l_ta, l_da, l_dha, l_tha,
+                              l_nna, l_lla, l_nga, l_pha, l_va, l_ma, l_bha, l_ba, l_pa]
 
         self.filename = filename
 
