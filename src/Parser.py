@@ -195,7 +195,7 @@ class Parser:
 
             self.no_syllables += no_syllables
 
-            if no_syllables > 2:
+            if no_syllables >= 2:
                 self.no_polysyllables += 1
 
     # Number of characters in content
