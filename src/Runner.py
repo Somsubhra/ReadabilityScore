@@ -23,7 +23,6 @@ class Runner:
         asl = []
         awl = []
         asw = []
-        psw = []
         psw30 = []
         juk30 = []
 
@@ -50,7 +49,7 @@ class Runner:
 
         # Write to output file
         output_file = open(path.join(self.output_directory, 'stats_training.csv'), 'w+')
-        output_file.write("\"Filename\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK30\"\n")
+        output_file.write("\"Filename\";\"ASL\";\"AWL\";\"ASW\";\"PSW30\";\"JUK30\"\n")
 
         print "Calculating English Readability indices for training data..."
         print "Added them to " + self.output_directory + "\english_index_training.csv..."
@@ -80,7 +79,6 @@ class Runner:
                     asl.append(p.average_sentence_length())
                     awl.append(p.average_word_length())
                     asw.append(p.average_syllable_per_word())
-                    psw.append(p.number_of_polysyllables())
                     psw30.append(p.number_of_polysyllables_per_30_sentences())
                     juk30.append(p.number_of_jukthakshar_per_30_words())
 
@@ -125,7 +123,7 @@ class Runner:
         # Generate the index
         print "Generating the custom index using Correlation and Linear Regression..."
 
-        g = Generator(asl, awl, asw, psw, psw30, juk30, difficulty_scores, self.output_directory)
+        g = Generator(asl, awl, asw, psw30, juk30, difficulty_scores, self.output_directory)
         g.generate()
 
         # Stop the training
@@ -140,7 +138,7 @@ class Runner:
         print "Writing stats to " + self.output_directory + "\stats_testing.csv..."
 
         output_file = open(path.join(self.output_directory, 'stats_testing.csv'), 'w+')
-        output_file.write("\"Filename\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK30\"\n")
+        output_file.write("\"Filename\";\"ASL\";\"AWL\";\"ASW\";\"PSW30\";\"JUK30\"\n")
 
         print "Calculating English Indices on testing data..."
         print "Applying our custom formula to testing data..."
