@@ -25,7 +25,7 @@ class Runner:
         asw = []
         psw = []
         psw30 = []
-        juk = []
+        juk30 = []
 
         difficulty = {}
         difficulty_scores = []
@@ -82,7 +82,7 @@ class Runner:
                     asw.append(p.average_syllable_per_word())
                     psw.append(p.number_of_polysyllables())
                     psw30.append(p.number_of_polysyllables_per_30_sentences())
-                    juk.append(p.number_of_jukthakshar_per_30_words())
+                    juk30.append(p.number_of_jukthakshar_per_30_words())
 
                 # The output line
                 output_line = "\"" + str(test_file) \
@@ -125,7 +125,7 @@ class Runner:
         # Generate the index
         print "Generating the custom index using Correlation and Linear Regression..."
 
-        g = Generator(asl, awl, asw, psw, psw30, juk, difficulty_scores, self.output_directory)
+        g = Generator(asl, awl, asw, psw, psw30, juk30, difficulty_scores, self.output_directory)
         g.generate()
 
         # Stop the training

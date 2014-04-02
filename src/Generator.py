@@ -8,13 +8,13 @@ from Parser import *
 class Generator:
 
     # Constructor for generator class
-    def __init__(self, asl, awl, asw, psw, psw30, juk, difficulty, output_train_directory):
+    def __init__(self, asl, awl, asw, psw, psw30, juk30, difficulty, output_train_directory):
         self.asl = asl
         self.awl = awl
         self.asw = asw
         self.psw = psw
         self.psw30 = psw30
-        self.juk = juk
+        self.juk30 = juk30
         self.difficulty = difficulty
         self.output_train_directory = output_train_directory
 
@@ -28,23 +28,23 @@ class Generator:
         corr_asw = stats.pearsonr(self.difficulty, self.asw)
         corr_psw = stats.pearsonr(self.difficulty, self.psw)
         corr_psw30 = stats.pearsonr(self.difficulty,self.psw30)
-        corr_juk = stats.pearsonr(self.difficulty, self.juk)
+        corr_juk30 = stats.pearsonr(self.difficulty, self.juk30)
 
         corr_asl_awl = stats.pearsonr(self.asl, self.awl)
         corr_asl_asw = stats.pearsonr(self.asl, self.asw)
         corr_asl_psw = stats.pearsonr(self.asl, self.asw)
         corr_asl_psw30 = stats.pearsonr(self.asl, self.psw30)
-        corr_asl_juk = stats.pearsonr(self.asl, self.juk)
+        corr_asl_juk30 = stats.pearsonr(self.asl, self.juk30)
         corr_awl_asw = stats.pearsonr(self.awl, self.asw)
         corr_awl_psw = stats.pearsonr(self.awl, self.psw)
         corr_awl_psw30 = stats.pearsonr(self.awl, self.psw30)
-        corr_awl_juk = stats.pearsonr(self.awl, self.juk)
+        corr_awl_juk30 = stats.pearsonr(self.awl, self.juk30)
         corr_asw_psw = stats.pearsonr(self.asw, self.psw)
         corr_asw_psw30 = stats.pearsonr(self.asw, self.psw30)
-        corr_asw_juk = stats.pearsonr(self.asw, self.juk)
+        corr_asw_juk30 = stats.pearsonr(self.asw, self.juk30)
         corr_psw_psw30 = stats.pearsonr(self.psw, self.psw30)
-        corr_psw_juk = stats.pearsonr(self.psw, self.juk)
-        corr_psw30_juk = stats.pearsonr(self.psw30, self.juk)
+        corr_psw_juk30 = stats.pearsonr(self.psw, self.juk30)
+        corr_psw30_juk30 = stats.pearsonr(self.psw30, self.juk30)
 
         output_file = open(path.join(self.output_train_directory, 'stats_training.csv'), 'a')
 
@@ -64,7 +64,7 @@ class Generator:
                           + "\";\""
                           + str(corr_psw30[0])
                           + "\";\""
-                          + str(corr_juk[0])
+                          + str(corr_juk30[0])
                           + "\"\n")
 
         output_file.write("\"\";\"\";\"\";\"\";\"\";\"\";\"\"\n")
@@ -82,7 +82,7 @@ class Generator:
                           + "\";\""
                           + str(corr_asl_psw30[0])
                           + "\";\""
-                          + str(corr_asl_juk[0])
+                          + str(corr_asl_juk30[0])
                           + "\"\n")
         output_file.write("\"AWL"
                           + "\";\""
@@ -95,7 +95,7 @@ class Generator:
                           + "\";\""
                           + str(corr_awl_psw30[0])
                           + "\";\""
-                          + str(corr_awl_juk[0])
+                          + str(corr_awl_juk30[0])
                           + "\"\n")
         output_file.write("\"ASW"
                           + "\";\""
@@ -108,7 +108,7 @@ class Generator:
                           + "\";\""
                           + str(corr_asw_psw30[0])
                           + "\";\""
-                          + str(corr_asw_juk[0])
+                          + str(corr_asw_juk30[0])
                           + "\"\n")
         output_file.write("\"PSW"
                           + "\";\""
@@ -121,7 +121,7 @@ class Generator:
                           + "\";\""
                           + str(corr_psw_psw30[0])
                           + "\";\""
-                          + str(corr_psw_juk[0])
+                          + str(corr_psw_juk30[0])
                           + "\"\n")
         output_file.write("\"PSW30"
                           + "\";\""
@@ -134,19 +134,19 @@ class Generator:
                           + str(corr_psw_psw30[0])
                           + "\";\""
                           + "\";\""
-                          + str(corr_psw30_juk[0])
+                          + str(corr_psw30_juk30[0])
                           + "\"\n")
         output_file.write("\"JUK30"
                           + "\";\""
-                          + str(corr_asl_juk[0])
+                          + str(corr_asl_juk30[0])
                           + "\";\""
-                          + str(corr_awl_juk[0])
+                          + str(corr_awl_juk30[0])
                           + "\";\""
-                          + str(corr_asw_juk[0])
+                          + str(corr_asw_juk30[0])
                           + "\";\""
-                          + str(corr_psw_juk[0])
+                          + str(corr_psw_juk30[0])
                           + "\";\""
-                          + str(corr_psw30_juk[0])
+                          + str(corr_psw30_juk30[0])
                           + "\";\""
                           + "\"\n")
 
@@ -166,7 +166,7 @@ class Generator:
         #    self.features.append('psw')
         if abs(corr_psw30[0]) > threshold:
             self.features.append('psw30')
-        if abs(corr_juk[0]) > threshold:
+        if abs(corr_juk30[0]) > threshold:
             self.features.append('juk30')
 
         print "Features selected", self.features
@@ -187,7 +187,7 @@ class Generator:
             elif feature == 'psw30':
                 features_data.append(self.psw30)
             elif feature == 'juk30':
-                features_data.append(self.juk)
+                features_data.append(self.juk30)
 
         no_features = len(self.features)
 
