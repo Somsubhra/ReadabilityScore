@@ -39,7 +39,7 @@ class Runner:
             mkdir(self.output_directory)
 
         # Write to output file
-        output_file = open('out/result.csv', 'w+')
+        output_file = open(path.join(self.output_directory, 'result.csv'), 'w+')
         output_file.write("\"Filename\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK\"\n")
 
         english_index_file = open('out/english_index.csv', 'w+')
@@ -105,5 +105,5 @@ class Runner:
         output_file.close()
         english_index_file.close()
 
-        g = Generator(asl, awl, asw, psw, psw30, juk, difficulty_scores)
+        g = Generator(asl, awl, asw, psw, psw30, juk, difficulty_scores, self.output_directory)
         g.generate()
