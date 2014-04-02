@@ -90,8 +90,6 @@ class Runner:
                               + str(p.average_word_length())\
                               + "\";\"" \
                               + str(p.average_syllable_per_word()) \
-                              + "\";\""\
-                              + str(p.number_of_polysyllables()) \
                               + "\";\"" \
                               + str(p.number_of_polysyllables_per_30_sentences()) \
                               + "\";\""\
@@ -175,8 +173,6 @@ class Runner:
                               + str(p.average_word_length())\
                               + "\";\"" \
                               + str(p.average_syllable_per_word()) \
-                              + "\";\""\
-                              + str(p.number_of_polysyllables()) \
                               + "\";\"" \
                               + str(p.number_of_polysyllables_per_30_sentences()) \
                               + "\";\""\
