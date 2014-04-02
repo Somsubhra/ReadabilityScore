@@ -42,7 +42,7 @@ class Runner:
         output_file = open(path.join(self.output_directory, 'result.csv'), 'w+')
         output_file.write("\"Filename\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK\"\n")
 
-        english_index_file = open('out/english_index.csv', 'w+')
+        english_index_file = open(path.join(self.output_directory, 'english_index.csv'), 'w+')
         english_index_file.write("\"Filename\";\"Automatic Readability Index\";"
                                  "\"Gunning Fog Index\";\"Smog Index\";\"Flesch Reading Ease\";"
                                  "\"Flesch Kincaid Grade Level\";\"Coleman Liau Index\"\n")
