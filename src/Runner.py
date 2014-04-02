@@ -1,4 +1,5 @@
 from Calculator import *
+from Generator import *
 from os import walk, path, stat, mkdir
 
 
@@ -103,3 +104,6 @@ class Runner:
 
         output_file.close()
         english_index_file.close()
+
+        g = Generator(asl, awl, asw, psw, psw30, juk, difficulty_scores)
+        g.generate()
