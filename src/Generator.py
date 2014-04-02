@@ -188,13 +188,16 @@ class Generator:
 
         X = np.vstack([np.ones(n), x]).T
 
+        model, resid = np.linalg.lstsq(X, y)[:2]
+        r2 = 1 - resid / (y.size * y.var())
+
         coeffs = np.linalg.lstsq(X, y)[0]
-        
+
         formula = ""
         for i in range(no_features):
             formula += "(" + str(coeffs[i]) + ") * (" + str(features[i]) + ") + "
 
-        formula += "(" + str(coeffs[no_features]) + ")"
+        formula += "(" + str(coeffs[no_features]) + ")\nR^2 : " + str(r2)
 
         print formula
 
