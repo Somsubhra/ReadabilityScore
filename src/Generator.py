@@ -164,22 +164,19 @@ class Generator:
 
         length = len(self.difficulty)
 
-        for i in range(length):
-            features_record = []
-            for feature in features:
-                if feature == 'asl':
-                    features_record.append(self.asl[i])
-                elif feature == 'awl':
-                    features_record.append(self.awl[i])
-                elif feature == 'asw':
-                    features_record.append(self.asw[i])
-                elif feature == 'psw':
-                    features_record.append(self.psw[i])
-                elif feature == 'psw30':
-                    features_record.append(self.psw30[i])
-                elif feature == 'juk':
-                    features_record.append(self.juk[i])
-            features_data.append(features_record)
+        for feature in features:
+            if feature == 'asl':
+                features_data.append(self.asl)
+            elif feature == 'awl':
+                features_data.append(self.awl)
+            elif feature == 'asw':
+                features_data.append(self.asw)
+            elif feature == 'psw':
+                features_data.append(self.psw)
+            elif feature == 'psw30':
+                features_data.append(self.psw30)
+            elif feature == 'juk':
+                features_data.append(self.juk)
 
         no_features = len(features)
 
@@ -191,5 +188,7 @@ class Generator:
 
         X = np.vstack([np.ones(n), x]).T
 
-        coeffs = np.linalg.lstsq(X. y)[0]
+        coeffs = np.linalg.lstsq(X, y)[0]
+
+        print coeffs
 
