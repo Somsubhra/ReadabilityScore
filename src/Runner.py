@@ -13,6 +13,24 @@ class Runner:
     # The main running method for the runner
     def run(self):
 
+        asl = []
+        awl = []
+        asw = []
+        psw = []
+        psw30 = []
+        juk = []
+
+        difficulty = {}
+        difficulty_scores = []
+
+        lines = open('manual_difficulty_scores').readlines()
+
+        for line in lines:
+            if line == '\n':
+                break
+            line = str(line).split(':')
+            difficulty[line[0]] = int(line[1])
+
         # Create output directory
         try:
             stat(self.output_directory)
@@ -38,6 +56,15 @@ class Runner:
 
                 # The parser
                 p = c.parser
+
+                asl.append(p.average_sentence_length())
+                awl.append(p.average_word_length())
+                asw.append(p.average_syllable_per_word())
+                psw.append(p.number_of_syllables())
+                psw30.append(p.number_of_polysyllables_per_30_sentences())
+                juk.append(p.number_of_jukthakshar())
+
+                difficulty_scores.append(difficulty[test_file])
 
                 # The output line
                 output_line = "\"" + str(test_file) \
