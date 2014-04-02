@@ -172,8 +172,6 @@ class Runner:
                 # The output line
                 output_line = "\"" + str(test_file) \
                               + "\";\"" \
-                              + str(index)\
-                              + "\";\"" \
                               + str(p.average_sentence_length())\
                               + "\";\"" \
                               + str(p.average_word_length())\
@@ -189,20 +187,23 @@ class Runner:
 
                 output_file.write(output_line)
 
-                index_output_line = "\"" + str(test_file) \
-                                            + "\";\"" \
-                                            + str(c.automated_readability_index())\
-                                            + "\";\"" \
-                                            + str(c.gunning_fog_index())\
-                                            + "\";\"" \
-                                            + str(c.smog_index()) \
-                                            + "\";\""\
-                                            + str(c.flesch_reading_ease()) \
-                                            + "\";\"" \
-                                            + str(c.flesch_kincaid_grade_level()) \
-                                            + "\";\""\
-                                            + str(c.coleman_liau_index())\
-                                            + "\"\n"
+                index_output_line = "\"" \
+                                    + str(test_file) \
+                                    + "\";\"" \
+                                    + str(index) \
+                                    + "\";\"" \
+                                    + str(c.automated_readability_index())\
+                                    + "\";\"" \
+                                    + str(c.gunning_fog_index())\
+                                    + "\";\"" \
+                                    + str(c.smog_index()) \
+                                    + "\";\""\
+                                    + str(c.flesch_reading_ease()) \
+                                    + "\";\"" \
+                                    + str(c.flesch_kincaid_grade_level()) \
+                                    + "\";\""\
+                                    + str(c.coleman_liau_index())\
+                                    + "\"\n"
 
                 index_file.write(index_output_line)
 

@@ -154,17 +154,17 @@ class Generator:
 
         self.features = []
 
-        if abs(corr_asl[0]) > 0.2:
+        if abs(corr_asl[0]) > 0.45:
             self.features.append('asl')
-        if abs(corr_awl[0]) > 0.2:
+        if abs(corr_awl[0]) > 0.45:
             self.features.append('awl')
-        if abs(corr_asw[0]) > 0.2:
+        if abs(corr_asw[0]) > 0.45:
             self.features.append('asw')
-        if abs(corr_psw[0]) > 0.2:
+        if abs(corr_psw[0]) > 0.45:
             self.features.append('psw')
-        if abs(corr_psw30[0]) > 0.2:
+        if abs(corr_psw30[0]) > 0.45:
             self.features.append('psw30')
-        if abs(corr_juk[0]) > 0.2:
+        if abs(corr_juk[0]) > 0.45:
             self.features.append('juk')
 
         print "Features selected", self.features
