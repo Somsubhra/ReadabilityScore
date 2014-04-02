@@ -63,7 +63,7 @@ class Runner:
                     asl.append(p.average_sentence_length())
                     awl.append(p.average_word_length())
                     asw.append(p.average_syllable_per_word())
-                    psw.append(p.number_of_syllables())
+                    psw.append(p.number_of_polysyllables())
                     psw30.append(p.number_of_polysyllables_per_30_sentences())
                     juk.append(p.number_of_jukthakshar())
 

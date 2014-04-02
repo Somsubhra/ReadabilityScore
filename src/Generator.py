@@ -1,3 +1,4 @@
+import numpy as np
 from scipy import stats
 from os import path
 
@@ -159,5 +160,36 @@ class Generator:
         if abs(corr_juk[0]) > 0.2:
             features.append('juk')
 
-        print features
+        features_data = []
+
+        length = len(self.difficulty)
+
+        for i in range(length):
+            features_record = []
+            for feature in features:
+                if feature == 'asl':
+                    features_record.append(self.asl[i])
+                elif feature == 'awl':
+                    features_record.append(self.awl[i])
+                elif feature == 'asw':
+                    features_record.append(self.asw[i])
+                elif feature == 'psw':
+                    features_record.append(self.psw[i])
+                elif feature == 'psw30':
+                    features_record.append(self.psw30[i])
+                elif feature == 'juk':
+                    features_record.append(self.juk[i])
+            features_data.append(features_record)
+
+        no_features = len(features)
+
+        x = np.array(features_data, np.int32)
+
+        y = np.array(self.difficulty)
+
+        n = np.max(x.shape)
+
+        X = np.vstack([np.ones(n), x]).T
+
+        coeffs = np.linalg.lstsq(X. y)[0]
 
