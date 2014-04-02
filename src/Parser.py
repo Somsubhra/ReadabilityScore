@@ -224,7 +224,7 @@ class Parser:
 
     # Calculate average number of syllables per word
     def average_syllable_per_word(self):
-        return float(self.no_syllables) / self.no_words
+        return float(self.no_syllables) / float(self.no_words)
 
     # Calculate number of polysyllable words
     def number_of_polysyllables(self):
