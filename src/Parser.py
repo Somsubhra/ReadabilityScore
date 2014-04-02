@@ -167,20 +167,34 @@ class Parser:
 
             length = len(word)
 
+            count = 1
+
             if length > 3:
                 state = ordered_consonants.index(word[1]) > ordered_consonants.index(word[0])
 
             for i in range(2, length - 1):
+
+                if count == 2:
+                        count = 0
+                        no_syllables += 1
+
                 if state:
                     if ordered_consonants.index(word[i]) < ordered_consonants.index(word[i-1]):
+                        count = 0
                         no_syllables += 1
                         state = ordered_consonants.index(word[i+1]) > ordered_consonants.index(word[i])
                         continue
                 else:
                     if ordered_consonants.index(word[i]) > ordered_consonants.index(word[i-1]):
+                        count = 0
                         no_syllables += 1
                         state = state = ordered_consonants.index(word[i+1]) > ordered_consonants.index(word[i])
                         continue
+
+                count += 1
+
+            if count == 2:
+                no_syllables += 1
 
             self.no_syllables += no_syllables
 
