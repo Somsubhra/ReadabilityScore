@@ -7,12 +7,14 @@ from os import walk, path, stat, mkdir
 class Runner:
 
     # Constructor for the runner class
-    def __init__(self, input_train_directory, output_train_directory):
+    def __init__(self, input_train_directory, output_train_directory, input_test_directory, output_test_directory):
         self.input_train_directory = input_train_directory
         self.output_train_directory = output_train_directory
 
     # The main running method for the runner
     def run(self):
+
+        # Start the training
 
         asl = []
         awl = []
@@ -107,3 +109,11 @@ class Runner:
 
         g = Generator(asl, awl, asw, psw, psw30, juk, difficulty_scores, self.output_train_directory)
         g.generate()
+
+        # Stop the training
+
+        # Start testing
+
+
+
+        # Stop testing
