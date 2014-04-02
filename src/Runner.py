@@ -50,7 +50,7 @@ class Runner:
 
         # Write to output file
         output_file = open(path.join(self.output_directory, 'stats_training.csv'), 'w+')
-        output_file.write("\"Filename\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK\"\n")
+        output_file.write("\"Filename\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK30\"\n")
 
         print "Calculating English Readability indices for training data..."
         print "Added them to " + self.output_directory + "\english_index_training.csv..."
@@ -82,7 +82,7 @@ class Runner:
                     asw.append(p.average_syllable_per_word())
                     psw.append(p.number_of_polysyllables())
                     psw30.append(p.number_of_polysyllables_per_30_sentences())
-                    juk.append(p.number_of_jukthakshar())
+                    juk.append(p.number_of_jukthakshar_per_30_words())
 
                 # The output line
                 output_line = "\"" + str(test_file) \
@@ -97,7 +97,7 @@ class Runner:
                               + "\";\"" \
                               + str(p.number_of_polysyllables_per_30_sentences()) \
                               + "\";\""\
-                              + str(p.number_of_jukthakshar())\
+                              + str(p.number_of_jukthakshar_per_30_words())\
                               + "\"\n"
 
                 output_file.write(output_line)
@@ -140,7 +140,7 @@ class Runner:
         print "Writing stats to " + self.output_directory + "\stats_testing.csv..."
 
         output_file = open(path.join(self.output_directory, 'stats_testing.csv'), 'w+')
-        output_file.write("\"Filename\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK\"\n")
+        output_file.write("\"Filename\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK30\"\n")
 
         print "Calculating English Indices on testing data..."
         print "Applying our custom formula to testing data..."
@@ -182,7 +182,7 @@ class Runner:
                               + "\";\"" \
                               + str(p.number_of_polysyllables_per_30_sentences()) \
                               + "\";\""\
-                              + str(p.number_of_jukthakshar())\
+                              + str(p.number_of_jukthakshar_per_30_words())\
                               + "\"\n"
 
                 output_file.write(output_line)

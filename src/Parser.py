@@ -222,6 +222,10 @@ class Parser:
     def number_of_jukthakshar(self):
         return self.no_jukthakshar
 
+    # Calculate number of jukthakshars per 30 words
+    def number_of_jukthakshar_per_30_words(self):
+        return float(self.no_jukthakshar) * 30.0 / float(self.no_words)
+
     # Calculate average number of syllables per word
     def average_syllable_per_word(self):
         return float(self.no_syllables) / float(self.no_words)

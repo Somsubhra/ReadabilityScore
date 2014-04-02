@@ -50,7 +50,7 @@ class Generator:
 
         output_file.write("\"\";\"\";\"\";\"\";\"\";\"\";\"\"\n")
 
-        output_file.write("\"\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK\"\n")
+        output_file.write("\"\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK30\"\n")
 
         output_file.write("\"Correlation"
                           + "\";\""
@@ -69,7 +69,7 @@ class Generator:
 
         output_file.write("\"\";\"\";\"\";\"\";\"\";\"\";\"\"\n")
 
-        output_file.write("\"\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK\"\n")
+        output_file.write("\"\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK30\"\n")
 
         output_file.write("\"ASL"
                           + "\";\""
@@ -136,7 +136,7 @@ class Generator:
                           + "\";\""
                           + str(corr_psw30_juk[0])
                           + "\"\n")
-        output_file.write("\"JUK"
+        output_file.write("\"JUK30"
                           + "\";\""
                           + str(corr_asl_juk[0])
                           + "\";\""
@@ -154,18 +154,20 @@ class Generator:
 
         self.features = []
 
-        if abs(corr_asl[0]) > 0.45:
+        threshold = 0.4
+
+        if abs(corr_asl[0]) > threshold:
             self.features.append('asl')
-        if abs(corr_awl[0]) > 0.45:
+        if abs(corr_awl[0]) > threshold:
             self.features.append('awl')
-        if abs(corr_asw[0]) > 0.45:
+        if abs(corr_asw[0]) > threshold:
             self.features.append('asw')
-        if abs(corr_psw[0]) > 0.45:
-            self.features.append('psw')
-        if abs(corr_psw30[0]) > 0.45:
+        #if abs(corr_psw[0]) > threshold:
+        #    self.features.append('psw')
+        if abs(corr_psw30[0]) > threshold:
             self.features.append('psw30')
-        if abs(corr_juk[0]) > 0.45:
-            self.features.append('juk')
+        if abs(corr_juk[0]) > threshold:
+            self.features.append('juk30')
 
         print "Features selected", self.features
 
@@ -184,7 +186,7 @@ class Generator:
                 features_data.append(self.psw)
             elif feature == 'psw30':
                 features_data.append(self.psw30)
-            elif feature == 'juk':
+            elif feature == 'juk30':
                 features_data.append(self.juk)
 
         no_features = len(self.features)
@@ -235,8 +237,8 @@ class Generator:
                 index += float(self.parser.number_of_polysyllables()) * float(self.coeff[i])
             elif self.features[i] == 'psw30':
                 index += float(self.parser.number_of_polysyllables_per_30_sentences()) * float(self.coeff[i])
-            elif self.features[i] == 'juk':
-                index += float(self.parser.number_of_jukthakshar()) * float(self.coeff[i])
+            elif self.features[i] == 'juk30':
+                index += float(self.parser.number_of_jukthakshar_per_30_words()) * float(self.coeff[i])
 
         index += float(self.coeff[length])
 
