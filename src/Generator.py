@@ -146,17 +146,18 @@ class Generator:
 
         features = []
 
-        if abs(corr_asl[0]) < 0.2:
+        if abs(corr_asl[0]) > 0.2:
             features.append('asl')
-        if abs(corr_awl[0]) < 0.2:
+        if abs(corr_awl[0]) > 0.2:
             features.append('awl')
-        if abs(corr_asw[0]) < 0.2:
+        if abs(corr_asw[0]) > 0.2:
             features.append('asw')
-        if abs(corr_psw[0]) < 0.2:
+        if abs(corr_psw[0]) > 0.2:
             features.append('psw')
-        if abs(corr_psw30[0]) < 0.2:
+        if abs(corr_psw30[0]) > 0.2:
             features.append('psw30')
-        if abs(corr_juk[0]) < 0.2:
+        if abs(corr_juk[0]) > 0.2:
             features.append('juk')
 
         print features
+
