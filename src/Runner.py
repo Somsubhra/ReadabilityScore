@@ -15,10 +15,10 @@ class Runner:
     # The main running method for the runner
     def run(self):
 
-        print "Started the program...\n\n\n"
+        print "Started the program..."
 
         # Start the training
-        print "Started training from the train data...\n\n"
+        print "Started training from the training data..."
 
         asl = []
         awl = []
@@ -32,7 +32,7 @@ class Runner:
 
         lines = open('manual_difficulty_scores').readlines()
 
-        print "Reading the manual difficulty levels given to training data...\n\n"
+        print "Reading the manual difficulty levels given to training data..."
 
         for line in lines:
             if line == '\n':
@@ -46,14 +46,14 @@ class Runner:
         except:
             mkdir(self.output_directory)
 
-        print "Writing stats of training data to " + self.output_directory + "\stats_training.csv...\n\n"
+        print "Writing stats of training data to " + self.output_directory + "\stats_training.csv..."
 
         # Write to output file
         output_file = open(path.join(self.output_directory, 'stats_training.csv'), 'w+')
         output_file.write("\"Filename\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK\"\n")
 
-        print "Calculating English Readability indices for training data\n"
-        print "Added them to " + self.output_directory + "\english_index_training.csv...\n\n"
+        print "Calculating English Readability indices for training data..."
+        print "Added them to " + self.output_directory + "\english_index_training.csv..."
 
         english_index_file = open(path.join(self.output_directory, 'english_index_training.csv'), 'w+')
         english_index_file.write("\"Filename\";"
@@ -123,7 +123,7 @@ class Runner:
         english_index_file.close()
 
         # Generate the index
-        print "Generating the custom index using Correlation and Linear Regression...\n\n"
+        print "Generating the custom index using Correlation and Linear Regression..."
 
         g = Generator(asl, awl, asw, psw, psw30, juk, difficulty_scores, self.output_directory)
         g.generate()
@@ -134,17 +134,17 @@ class Runner:
 
         # Write to output file
 
-        print "Start testing on test data...\n\n"
+        print "Start testing on testing data..."
 
-        print "Calculate stats for testing data...\n"
-        print "Writing stats to " + self.output_directory + "\stats_testing.csv...\n\n"
+        print "Calculating stats for testing data..."
+        print "Writing stats to " + self.output_directory + "\stats_testing.csv..."
 
         output_file = open(path.join(self.output_directory, 'stats_testing.csv'), 'w+')
         output_file.write("\"Filename\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK\"\n")
 
-        print "Calculate English Indexes on testing data...\n\n"
-        print "Applying our custom formula to testing data...\n"
-        print "Output written to " + self.output_directory + "\index_testing.csv...\n\n"
+        print "Calculating English Indices on testing data..."
+        print "Applying our custom formula to testing data..."
+        print "Output written to " + self.output_directory + "\index_testing.csv..."
 
         index_file = open(path.join(self.output_directory, 'index_testing.csv'), 'w+')
         index_file.write("\"Filename\";"
@@ -209,5 +209,5 @@ class Runner:
         output_file.close()
         index_file.close()
 
-        print "End testing...\n"
+        print "End testing..."
         # Stop testing
