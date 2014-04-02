@@ -43,7 +43,7 @@ class Generator:
         corr_psw_juk = stats.pearsonr(self.psw, self.juk)
         corr_psw30_juk = stats.pearsonr(self.psw30, self.juk)
 
-        output_file = open(path.join(self.output_train_directory, 'result.csv'), 'a')
+        output_file = open(path.join(self.output_train_directory, 'stats_training.csv'), 'a')
 
         output_file.write("\"\";\"\";\"\";\"\";\"\";\"\";\"\"\n")
 

@@ -7,9 +7,10 @@ from os import walk, path, stat, mkdir
 class Runner:
 
     # Constructor for the runner class
-    def __init__(self, input_train_directory, output_train_directory, input_test_directory, output_test_directory):
+    def __init__(self, input_train_directory, input_test_directory, output_directory):
         self.input_train_directory = input_train_directory
-        self.output_train_directory = output_train_directory
+        self.output_directory = output_directory
+        self.input_test_directory = input_test_directory
 
     # The main running method for the runner
     def run(self):
@@ -36,18 +37,22 @@ class Runner:
 
         # Create output directory
         try:
-            stat(self.output_train_directory)
+            stat(self.output_directory)
         except:
-            mkdir(self.output_train_directory)
+            mkdir(self.output_directory)
 
         # Write to output file
-        output_file = open(path.join(self.output_train_directory, 'result.csv'), 'w+')
+        output_file = open(path.join(self.output_directory, 'stats_training.csv'), 'w+')
         output_file.write("\"Filename\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK\"\n")
 
-        english_index_file = open(path.join(self.output_train_directory, 'english_index.csv'), 'w+')
-        english_index_file.write("\"Filename\";\"Automatic Readability Index\";"
-                                 "\"Gunning Fog Index\";\"Smog Index\";\"Flesch Reading Ease\";"
-                                 "\"Flesch Kincaid Grade Level\";\"Coleman Liau Index\"\n")
+        english_index_file = open(path.join(self.output_directory, 'english_index_training.csv'), 'w+')
+        english_index_file.write("\"Filename\";"
+                                 "\"Automatic Readability Index\";"
+                                 "\"Gunning Fog Index\";"
+                                 "\"Smog Index\";"
+                                 "\"Flesch Reading Ease\";"
+                                 "\"Flesch Kincaid Grade Level\";"
+                                 "\"Coleman Liau Index\"\n")
 
         # Walk through all files in tree
         for (dir_path, _, file_names) in walk(self.input_train_directory):
@@ -107,13 +112,80 @@ class Runner:
         output_file.close()
         english_index_file.close()
 
-        g = Generator(asl, awl, asw, psw, psw30, juk, difficulty_scores, self.output_train_directory)
+        # Generate the index
+        g = Generator(asl, awl, asw, psw, psw30, juk, difficulty_scores, self.output_directory)
         g.generate()
 
         # Stop the training
 
         # Start testing
 
+        # Write to output file
+        output_file = open(path.join(self.output_directory, 'stats_testing.csv'), 'w+')
+        output_file.write("\"Filename\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK\"\n")
+
+        index_file = open(path.join(self.output_directory, 'index_testing.csv'), 'w+')
+        index_file.write("\"Filename\";"
+                         "\"Generated Index Value\";"
+                         "\"Automatic Readability Index\";"
+                         "\"Gunning Fog Index\";"
+                         "\"Smog Index\";"
+                         "\"Flesch Reading Ease\";"
+                         "\"Flesch Kincaid Grade Level\";"
+                         "\"Coleman Liau Index\"\n")
+
+        # Walk through all files in tree
+        for (dir_path, _, file_names) in walk(self.input_test_directory):
+            for filename in file_names:
+                test_file = path.join(dir_path, filename)
+
+                # The index calculator
+                c = Calculator(test_file)
+
+                index = g.custom_index(test_file)
+
+                # The parser
+                p = c.parser
+
+                # The output line
+                output_line = "\"" + str(test_file) \
+                              + "\";\"" \
+                              + str(index)\
+                              + "\";\"" \
+                              + str(p.average_sentence_length())\
+                              + "\";\"" \
+                              + str(p.average_word_length())\
+                              + "\";\"" \
+                              + str(p.average_syllable_per_word()) \
+                              + "\";\""\
+                              + str(p.number_of_polysyllables()) \
+                              + "\";\"" \
+                              + str(p.number_of_polysyllables_per_30_sentences()) \
+                              + "\";\""\
+                              + str(p.number_of_jukthakshar())\
+                              + "\"\n"
+
+                output_file.write(output_line)
+
+                index_output_line = "\"" + str(test_file) \
+                                            + "\";\"" \
+                                            + str(c.automated_readability_index())\
+                                            + "\";\"" \
+                                            + str(c.gunning_fog_index())\
+                                            + "\";\"" \
+                                            + str(c.smog_index()) \
+                                            + "\";\""\
+                                            + str(c.flesch_reading_ease()) \
+                                            + "\";\"" \
+                                            + str(c.flesch_kincaid_grade_level()) \
+                                            + "\";\""\
+                                            + str(c.coleman_liau_index())\
+                                            + "\"\n"
+
+                index_file.write(index_output_line)
+
+        output_file.close()
+        index_file.close()
 
 
         # Stop testing
