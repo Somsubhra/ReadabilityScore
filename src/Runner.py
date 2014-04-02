@@ -58,14 +58,14 @@ class Runner:
                 # The parser
                 p = c.parser
 
-                asl.append(p.average_sentence_length())
-                awl.append(p.average_word_length())
-                asw.append(p.average_syllable_per_word())
-                psw.append(p.number_of_syllables())
-                psw30.append(p.number_of_polysyllables_per_30_sentences())
-                juk.append(p.number_of_jukthakshar())
-
-                difficulty_scores.append(difficulty[test_file])
+                if difficulty.has_key(test_file):
+                    difficulty_scores.append(difficulty[test_file])
+                    asl.append(p.average_sentence_length())
+                    awl.append(p.average_word_length())
+                    asw.append(p.average_syllable_per_word())
+                    psw.append(p.number_of_syllables())
+                    psw30.append(p.number_of_polysyllables_per_30_sentences())
+                    juk.append(p.number_of_jukthakshar())
 
                 # The output line
                 output_line = "\"" + str(test_file) \
