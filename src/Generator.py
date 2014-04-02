@@ -189,6 +189,12 @@ class Generator:
         X = np.vstack([np.ones(n), x]).T
 
         coeffs = np.linalg.lstsq(X, y)[0]
+        
+        formula = ""
+        for i in range(no_features):
+            formula += "(" + str(coeffs[i]) + ") * (" + str(features[i]) + ") + "
 
-        print coeffs
+        formula += "(" + str(coeffs[no_features]) + ")"
+
+        print formula
 
