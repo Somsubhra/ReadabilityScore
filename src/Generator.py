@@ -1,11 +1,14 @@
 import numpy as np
 from scipy import stats
 from os import path
+from Parser import *
 
 
 # Generator class
 class Generator:
-    def __init__(self, asl, awl, asw, psw, psw30, juk, difficulty, output_directory):
+
+    # Constructor for generator class
+    def __init__(self, asl, awl, asw, psw, psw30, juk, difficulty, output_train_directory):
         self.asl = asl
         self.awl = awl
         self.asw = asw
@@ -13,8 +16,9 @@ class Generator:
         self.psw30 = psw30
         self.juk = juk
         self.difficulty = difficulty
-        self.output_directory = output_directory
+        self.output_train_directory = output_train_directory
 
+    # Generate the equation using linear regression
     def generate(self):
         corr_asl = stats.pearsonr(self.difficulty, self.asl)
         corr_awl = stats.pearsonr(self.difficulty, self.awl)
@@ -39,7 +43,7 @@ class Generator:
         corr_psw_juk = stats.pearsonr(self.psw, self.juk)
         corr_psw30_juk = stats.pearsonr(self.psw30, self.juk)
 
-        output_file = open(path.join(self.output_directory, 'result.csv'), 'a')
+        output_file = open(path.join(self.output_train_directory, 'result.csv'), 'a')
 
         output_file.write("\"\";\"\";\"\";\"\";\"\";\"\";\"\"\n")
 
@@ -145,26 +149,26 @@ class Generator:
 
         output_file.close()
 
-        features = []
+        self.features = []
 
         if abs(corr_asl[0]) > 0.2:
-            features.append('asl')
+            self.features.append('asl')
         if abs(corr_awl[0]) > 0.2:
-            features.append('awl')
+            self.features.append('awl')
         if abs(corr_asw[0]) > 0.2:
-            features.append('asw')
+            self.features.append('asw')
         if abs(corr_psw[0]) > 0.2:
-            features.append('psw')
+            self.features.append('psw')
         if abs(corr_psw30[0]) > 0.2:
-            features.append('psw30')
+            self.features.append('psw30')
         if abs(corr_juk[0]) > 0.2:
-            features.append('juk')
+            self.features.append('juk')
 
         features_data = []
 
         length = len(self.difficulty)
 
-        for feature in features:
+        for feature in self.features:
             if feature == 'asl':
                 features_data.append(self.asl)
             elif feature == 'awl':
@@ -178,7 +182,7 @@ class Generator:
             elif feature == 'juk':
                 features_data.append(self.juk)
 
-        no_features = len(features)
+        no_features = len(self.features)
 
         x = np.array(features_data, np.int32)
 
@@ -188,16 +192,43 @@ class Generator:
 
         X = np.vstack([np.ones(n), x]).T
 
-        model, resid = np.linalg.lstsq(X, y)[:2]
-        r2 = 1 - resid / (y.size * y.var())
+        model, residue = np.linalg.lstsq(X, y)[:2]
+        r2 = 1 - residue / (y.size * y.var())
 
-        coeffs = np.linalg.lstsq(X, y)[0]
+        self.coeff = np.linalg.lstsq(X, y)[0]
 
         formula = ""
         for i in range(no_features):
-            formula += "(" + str(coeffs[i]) + ") * (" + str(features[i]) + ") + "
+            formula += "(" + str(self.coeff[i]) + ") * (" + str(self.features[i]) + ") + "
 
-        formula += "(" + str(coeffs[no_features]) + ")\nR^2 : " + str(r2)
+        formula += "(" + str(self.coeff[no_features]) + ")\nR^2 : " + str(r2)
 
         print formula
 
+    # Generate the custom index
+    def custom_index(self, filename):
+
+        self.parser = Parser(filename)
+
+        length = len(self.features)
+
+        index = 0.0
+
+        feature_value = []
+        for i in range(length):
+            if self.features[i] == 'asl':
+                index += float(self.parser.average_sentence_length()) * float(self.coeff[i])
+            elif self.features[i] == 'awl':
+                index += float(self.parser.average_word_length()) * float(self.coeff[i])
+            elif self.features[i] == 'asw':
+                index += float(self.parser.average_syllable_per_word()) * float(self.coeff[i])
+            elif self.features[i] == 'psw':
+                index += float(self.parser.number_of_polysyllables()) * float(self.coeff[i])
+            elif self.features[i] == 'psw30':
+                index += float(self.parser.number_of_polysyllables_per_30_sentences()) * float(self.coeff[i])
+            elif self.features[i] == 'juk':
+                index += float(self.parser.number_of_jukthakshar()) * float(self.coeff[i])
+
+        index += float(self.coeff[length])
+
+        return index

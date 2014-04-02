@@ -7,9 +7,9 @@ from os import walk, path, stat, mkdir
 class Runner:
 
     # Constructor for the runner class
-    def __init__(self, input_directory, output_directory):
-        self.input_directory = input_directory
-        self.output_directory = output_directory
+    def __init__(self, input_train_directory, output_train_directory):
+        self.input_train_directory = input_train_directory
+        self.output_train_directory = output_train_directory
 
     # The main running method for the runner
     def run(self):
@@ -34,21 +34,21 @@ class Runner:
 
         # Create output directory
         try:
-            stat(self.output_directory)
+            stat(self.output_train_directory)
         except:
-            mkdir(self.output_directory)
+            mkdir(self.output_train_directory)
 
         # Write to output file
-        output_file = open(path.join(self.output_directory, 'result.csv'), 'w+')
+        output_file = open(path.join(self.output_train_directory, 'result.csv'), 'w+')
         output_file.write("\"Filename\";\"ASL\";\"AWL\";\"ASW\";\"PSW\";\"PSW30\";\"JUK\"\n")
 
-        english_index_file = open(path.join(self.output_directory, 'english_index.csv'), 'w+')
+        english_index_file = open(path.join(self.output_train_directory, 'english_index.csv'), 'w+')
         english_index_file.write("\"Filename\";\"Automatic Readability Index\";"
                                  "\"Gunning Fog Index\";\"Smog Index\";\"Flesch Reading Ease\";"
                                  "\"Flesch Kincaid Grade Level\";\"Coleman Liau Index\"\n")
 
         # Walk through all files in tree
-        for (dir_path, _, file_names) in walk(self.input_directory):
+        for (dir_path, _, file_names) in walk(self.input_train_directory):
             for filename in file_names:
                 test_file = path.join(dir_path, filename)
 
@@ -105,5 +105,5 @@ class Runner:
         output_file.close()
         english_index_file.close()
 
-        g = Generator(asl, awl, asw, psw, psw30, juk, difficulty_scores, self.output_directory)
+        g = Generator(asl, awl, asw, psw, psw30, juk, difficulty_scores, self.output_train_directory)
         g.generate()
