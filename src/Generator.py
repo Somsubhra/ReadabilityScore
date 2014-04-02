@@ -20,6 +20,9 @@ class Generator:
 
     # Generate the equation using linear regression
     def generate(self):
+
+        print "Calculating correlations...\n\n"
+
         corr_asl = stats.pearsonr(self.difficulty, self.asl)
         corr_awl = stats.pearsonr(self.difficulty, self.awl)
         corr_asw = stats.pearsonr(self.difficulty, self.asw)
@@ -164,6 +167,8 @@ class Generator:
         if abs(corr_juk[0]) > 0.2:
             self.features.append('juk')
 
+        print "Features selected", self.features, "\n\n"
+
         features_data = []
 
         length = len(self.difficulty)
@@ -184,6 +189,7 @@ class Generator:
 
         no_features = len(self.features)
 
+        print "Performing linear regression using manual difficulty and selected features...\n\n"
         x = np.array(features_data, np.int32)
 
         y = np.array(self.difficulty)
@@ -203,7 +209,9 @@ class Generator:
 
         formula += "(" + str(self.coeff[no_features]) + ")\nR^2 : " + str(r2)
 
+        print "Generated the following formula: \n"
         print formula
+        print "\n\n"
 
     # Generate the custom index
     def custom_index(self, filename):
