@@ -131,9 +131,6 @@ class Parser:
         # Calculate number of jukthakshars
         self.no_jukthakshar = 0
 
-        # Calculate average syllable per word
-        self.avg_syllable_w = 0
-
         # Calculate the number of polysyllables
         self.no_polysyllables = 0
 
@@ -198,8 +195,6 @@ class Parser:
 
             self.no_syllables += no_syllables
 
-            self.avg_syllable_w += float(no_syllables) / self.no_words
-
             if no_syllables > 2:
                 self.no_polysyllables += 1
 
@@ -229,7 +224,7 @@ class Parser:
 
     # Calculate average number of syllables per word
     def average_syllable_per_word(self):
-        return self.avg_syllable_w
+        return float(self.no_syllables) / self.no_words
 
     # Calculate number of polysyllable words
     def number_of_polysyllables(self):
