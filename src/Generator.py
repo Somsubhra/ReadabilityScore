@@ -173,7 +173,8 @@ class Generator:
         for i in range(no_features):
             formula += "(" + str(self.coeff[i]) + ") * (" + str(self.features[i]) + ") + "
 
-        formula += "(" + str(self.coeff[no_features]) + ")\nR^2 : " + str(r2)
+        formula += "(" + str(self.coeff[no_features]) + ")"
+        #print "R^2 : " + str(r2)
 
         print "Generated the following formula: "
         print "---------------------------------------------------------------------------------"
@@ -204,4 +205,4 @@ class Generator:
 
         index += float(self.coeff[length])
 
-        return index/ 4.6
+        return index
