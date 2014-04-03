@@ -198,7 +198,7 @@ class Generator:
             elif self.features[i] == 'asw':
                 index += float(self.parser.average_syllable_per_word()) * float(self.coeff[i])
             elif self.features[i] == 'psw30':
-                index += float(self.parser.number_of_polysyllables_per_30_sentences()) * float(self.coeff[i])
+                index += float(self.parser.number_of_polysyllables_per_30_words()) * float(self.coeff[i])
             elif self.features[i] == 'juk30':
                 index += float(self.parser.number_of_jukthakshar_per_30_words()) * float(self.coeff[i])
 

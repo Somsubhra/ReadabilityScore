@@ -79,7 +79,7 @@ class Runner:
                     asl.append(p.average_sentence_length())
                     awl.append(p.average_word_length())
                     asw.append(p.average_syllable_per_word())
-                    psw30.append(p.number_of_polysyllables_per_30_sentences())
+                    psw30.append(p.number_of_polysyllables_per_30_words())
                     juk30.append(p.number_of_jukthakshar_per_30_words())
 
                 # The output line
@@ -91,7 +91,7 @@ class Runner:
                               + "\";\"" \
                               + str(p.average_syllable_per_word()) \
                               + "\";\"" \
-                              + str(p.number_of_polysyllables_per_30_sentences()) \
+                              + str(p.number_of_polysyllables_per_30_words()) \
                               + "\";\""\
                               + str(p.number_of_jukthakshar_per_30_words())\
                               + "\"\n"
@@ -174,7 +174,7 @@ class Runner:
                               + "\";\"" \
                               + str(p.average_syllable_per_word()) \
                               + "\";\"" \
-                              + str(p.number_of_polysyllables_per_30_sentences()) \
+                              + str(p.number_of_polysyllables_per_30_words()) \
                               + "\";\""\
                               + str(p.number_of_jukthakshar_per_30_words())\
                               + "\"\n"
