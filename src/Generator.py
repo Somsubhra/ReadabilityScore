@@ -204,4 +204,4 @@ class Generator:
 
         index += float(self.coeff[length])
 
-        return index
+        return index/ 4.6
