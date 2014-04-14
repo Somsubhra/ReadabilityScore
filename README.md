@@ -1,7 +1,7 @@
 Readability Score
 ==============
 
-Generating a readability model from language features using correlation and Linear Regression and then calculating Readability Score for Gujarati. Includes a sylabbification module as well.
+Generating a readability model from language features using correlation and Linear Regression and then calculating Readability Score for Gujarati. Includes a syllable counting module as well.
 
 Prerequisites
 ==============
@@ -12,8 +12,11 @@ Run
 ==============
 
 1.) Place training data in corpus/training directory.
+
 2.) Place testing data in corpus/testing directory.
+
 3.) Add manual difficulty score of training data in manual_difficulty_score.
+
 4.) Run the run.sh or run.bat file.
 
 The output is generated in out/ directory.
